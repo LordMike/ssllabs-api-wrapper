@@ -71,6 +71,7 @@
     <Compile Include="AnalyzeTests.cs" />
     <Compile Include="GenericPositiveTests.cs" />
     <Compile Include="GenericNegativeTests.cs" />
+    <Compile Include="HostNameChecks.cs" />
     <Compile Include="StatusCodesTests.cs" />
     <Compile Include="InfoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

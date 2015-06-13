@@ -25,11 +25,11 @@ namespace SSLLabsApiWrapper.Domain
 
         public static bool IsValidHostname(string hostname)
         {
-            if (Uri.CheckHostName(hostname) == UriHostNameType.Dns)
+            if (Uri.CheckHostName(hostname) == UriHostNameType.Dns && hostname.Contains("."))
                 return true;
 
             Uri uri;
-            if (Uri.TryCreate(hostname, UriKind.Absolute, out uri))
+            if (Uri.TryCreate(hostname, UriKind.Absolute, out uri) && (uri.Scheme == "https" || uri.Scheme == "http"))
                 return true;
 
             return false;
