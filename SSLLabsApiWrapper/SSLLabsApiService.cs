@@ -156,7 +156,7 @@ namespace SSLLabsApiWrapper
             return analyzeModel;
         }
 
-        public Endpoint GetEndpointData(string host, string s, FromCache fromCache = FromCache.Off)
+        public Endpoint GetEndpointData(string host, string server, FromCache fromCache = FromCache.Off)
         {
             Endpoint endpointModel = new Endpoint();
 
@@ -169,7 +169,7 @@ namespace SSLLabsApiWrapper
             }
 
             // Building request model
-            RequestModel requestModel = _requestModelFactory.NewEndpointDataRequestModel(ApiUrl, "getEndpointData", host, s, fromCache.ToString());
+            RequestModel requestModel = _requestModelFactory.NewEndpointDataRequestModel(ApiUrl, "getEndpointData", host, server, fromCache.ToString());
 
             try
             {

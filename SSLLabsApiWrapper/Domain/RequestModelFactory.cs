@@ -26,12 +26,12 @@ namespace SSLLabsApiWrapper.Domain
 			return requestModel;
 		}
 
-		public RequestModel NewEndpointDataRequestModel(string apiBaseUrl, string action, string host, string s, string fromCache)
+		public RequestModel NewEndpointDataRequestModel(string apiBaseUrl, string action, string host, string server, string fromCache)
 		{
 			RequestModel requestModel = new RequestModel() {ApiBaseUrl = apiBaseUrl, Action = action};
 
 			requestModel.Parameters.Add("host", host);
-			requestModel.Parameters.Add("s", s);
+			requestModel.Parameters.Add("s", server);
 			requestModel.Parameters.Add("fromCache", fromCache);
 
 			return requestModel;
