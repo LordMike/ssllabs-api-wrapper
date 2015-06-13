@@ -10,7 +10,7 @@ namespace SSLLabsApiWrapper.External
 	{
 		public WebResponseModel MakeGetRequest(RequestModel requestModel)
 		{
-			var url = requestModel.ApiBaseUrl + "/" + requestModel.Action;
+			string url = requestModel.ApiBaseUrl + "/" + requestModel.Action;
 
 			if (requestModel.Parameters.Count >= 1)
 			{
@@ -18,13 +18,13 @@ namespace SSLLabsApiWrapper.External
 									  where parameter.Value != null select string.Format("{0}={1}", parameter.Key, parameter.Value))));
 			}
 
-			var webResponseModel = new WebResponseModel() {Url = url};
+			WebResponseModel webResponseModel = new WebResponseModel() {Url = url};
 
-			var request = (HttpWebRequest)WebRequest.Create(url);
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 			request.Method = "GET";
 
-			var response = (HttpWebResponse)request.GetResponse();
-			var streamReader = new StreamReader(response.GetResponseStream());
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			StreamReader streamReader = new StreamReader(response.GetResponseStream());
 
 			webResponseModel.Payloay = streamReader.ReadToEnd();
 			webResponseModel.StatusCode = (int)response.StatusCode;

@@ -22,7 +22,7 @@ namespace given_that_I_make_a_GetEndpointDetails_request
 			_endpointHost = ConfigurationManager.AppSettings.Get("EndpointHost");
 			_endpointIp = ConfigurationManager.AppSettings.Get("EndpointIP");
 
-			var ssllService = new SSLLabsApiService(ConfigurationManager.AppSettings.Get("ApiUrl"));
+			SSLLabsApiService ssllService = new SSLLabsApiService(ConfigurationManager.AppSettings.Get("ApiUrl"));
 			_endpoint = ssllService.GetEndpointData(_endpointHost, _endpointIp);
 		}
 

@@ -15,8 +15,8 @@ namespace given_that_I_make_a_status_codes_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
-			var webResponseModel = new WebResponseModel()
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"statusDetails\":{\"TESTING_PROTOCOL_INTOLERANCE_399\":\"Testing Protocol Intolerance (TLS 1.99)\",\"" +
 				          "PREPARING_REPORT\":\"Preparing the report\",\"TESTING_SESSION_RESUMPTION\":\"Testing session resumption\",\"" +
@@ -46,7 +46,7 @@ namespace given_that_I_make_a_status_codes_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.GetStatusCodes();
 		}
 
@@ -63,8 +63,8 @@ namespace given_that_I_make_a_status_codes_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
-			var webResponseModel = new WebResponseModel()
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = null,
 				StatusCode = 0,
@@ -74,7 +74,7 @@ namespace given_that_I_make_a_status_codes_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.GetStatusCodes();
 		}
 

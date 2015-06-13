@@ -14,7 +14,7 @@ namespace given_that_I_make_a_GetStatusCodes_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var ssllService = new SSLLabsApiService(ConfigurationManager.AppSettings.Get("ApiUrl"));
+			SSLLabsApiService ssllService = new SSLLabsApiService(ConfigurationManager.AppSettings.Get("ApiUrl"));
 			_statusCodes = ssllService.GetStatusCodes();
 		}
 

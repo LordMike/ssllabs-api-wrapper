@@ -16,9 +16,9 @@ namespace given_that_I_make_a_analyze_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
 			TestHost = "https://www.ashleypoole.co.uk";
-			var webResponseModel = new WebResponseModel()
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTPS\",\"isPublic\":false,\"status\":\"READY\",\"" +
 				          "startTime\":1422115006431,\"testTime\":1422115131804,\"engineVersion\":\"1.12.8\",\"criteriaVersion\":\"2009i\",\"" +
@@ -33,7 +33,7 @@ namespace given_that_I_make_a_analyze_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.Analyze(TestHost);
 		}
 
@@ -50,9 +50,9 @@ namespace given_that_I_make_a_analyze_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
 			TestHost = "https://www.ashleypoole.co.uk";
-			var webResponseModel = new WebResponseModel()
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":false,\"status\":\"DNS\"" +
 				          ",\"statusMessage\":\"Resolving domain names\",\"startTime\":1422475200798,\"engineVersion\":\"1.12.8\"," +
@@ -64,7 +64,7 @@ namespace given_that_I_make_a_analyze_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.Analyze(TestHost);
 		}
 
@@ -81,9 +81,9 @@ namespace given_that_I_make_a_analyze_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
 			TestHost = "https://www.ashleypoole.co.uk";
-			var webResponseModel = new WebResponseModel()
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":true,\"" +
 				          "status\":\"IN_PROGRESS\",\"startTime\":1422479488403,\"engineVersion\":\"1.12.8\",\"criteriaVersion\":\"2009i\"" +
@@ -97,7 +97,7 @@ namespace given_that_I_make_a_analyze_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.Analyze(TestHost, SSLLabsApiService.Publish.On, SSLLabsApiService.StartNew.On,
 				SSLLabsApiService.FromCache.Ignore, null, SSLLabsApiService.All.Done, SSLLabsApiService.IgnoreMismatch.Off);
 		}
@@ -115,9 +115,9 @@ namespace given_that_I_make_a_analyze_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
 			TestHost = "https://www2.ashleypoole.co.uk";
-			var webResponseModel = new WebResponseModel()
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"host\":\"https://www2.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":false,\"status\":\"ERROR\"," +
 				          "\"statusMessage\":\"Unable to resolve domain name\",\"startTime\":1422478797953,\"testTime\":1422478798017," +
@@ -129,7 +129,7 @@ namespace given_that_I_make_a_analyze_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.Analyze(TestHost, SSLLabsApiService.Publish.On, SSLLabsApiService.StartNew.On,
 				SSLLabsApiService.FromCache.Ignore, null, SSLLabsApiService.All.Done, SSLLabsApiService.IgnoreMismatch.Off);
 		}
@@ -147,9 +147,9 @@ namespace given_that_I_make_a_analyze_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
 			TestHost = "https://www.ashleypoole.co.uk";
-			var webResponseModel = new WebResponseModel()
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"errors\":[{\"message\":\"Parameters \u0027fromCache\u0027 and \u0027startNew\u0027 cannot be used at the same time\"}]}",
 				StatusCode = 400,
@@ -159,7 +159,7 @@ namespace given_that_I_make_a_analyze_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.Analyze(TestHost, SSLLabsApiService.Publish.On, SSLLabsApiService.StartNew.On,
 				SSLLabsApiService.FromCache.Ignore, null, SSLLabsApiService.All.Done, SSLLabsApiService.IgnoreMismatch.Off);
 		}
@@ -171,10 +171,10 @@ namespace given_that_I_make_a_analyze_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
 			TestHost = "www.ashleypoole.somereallybadurl";
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.Analyze(TestHost);
 		}
 

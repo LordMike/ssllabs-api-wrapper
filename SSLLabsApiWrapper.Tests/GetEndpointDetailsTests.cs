@@ -18,11 +18,11 @@ namespace given_that_I_make_a_get_endpoint_details_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
 			TestHost = "https://www.ashleypoole.co.uk";
 			TestIP = "104.28.6.2";
 			TestAltName = "ashleypoole.co.uk";
-			var webResponseModel = new WebResponseModel()
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"ipAddress\":\"104.28.6.2\",\"statusMessage\":\"Ready\",\"grade\":\"A\",\"hasWarnings\":false,\"isExceptional\":false,\"progress\":100," +
 				          "\"duration\":72382,\"eta\":2,\"delegation\":3,\"details\":{\"hostStartTime\":1422796942752,\"key\":{\"size\":  256,\"alg\":\"EC\",\"strength\"" +
@@ -125,7 +125,7 @@ namespace given_that_I_make_a_get_endpoint_details_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.GetEndpointData(TestHost, TestIP);
 		}
 
@@ -166,10 +166,10 @@ namespace given_that_I_make_a_get_endpoint_details_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
 			TestHost = "https://www.ashleypoole.co.uk";
 			TestIP = "111.111.111.111";
-			var webResponseModel = new WebResponseModel()
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"errors\":[{\"message\":\"Endpoint not found\"}]}",
 				StatusCode = 400,
@@ -179,7 +179,7 @@ namespace given_that_I_make_a_get_endpoint_details_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.GetEndpointData(TestHost, TestIP);
 		}
 
@@ -196,8 +196,8 @@ namespace given_that_I_make_a_get_endpoint_details_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 
 			TestHost = "www.ashleypoole.somereallybadurl";
 			TestIP = "111.111.111.111";

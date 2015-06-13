@@ -3,6 +3,7 @@ using System.Threading;
 using SSLLabsApiWrapper.Domain;
 using SSLLabsApiWrapper.External;
 using SSLLabsApiWrapper.Interfaces;
+using SSLLabsApiWrapper.Models;
 using SSLLabsApiWrapper.Models.Response;
 using SSLLabsApiWrapper.Models.Response.BaseSubModels;
 
@@ -67,13 +68,13 @@ namespace SSLLabsApiWrapper
 
 		public Info Info()
 		{
-			var infoModel = new Info() {};
-		    var requestModel = _requestModelFactory.NewInfoRequestModel(ApiUrl, "info");
+			Info infoModel = new Info() {};
+		    RequestModel requestModel = _requestModelFactory.NewInfoRequestModel(ApiUrl, "info");
 
 			try
 			{
 				// Making Api request and binding result to model
-				var webResponse = _apiProvider.MakeGetRequest(requestModel);
+				WebResponseModel webResponse = _apiProvider.MakeGetRequest(requestModel);
 				infoModel = _responsePopulation.InfoModel(webResponse, infoModel);
 
 				if (infoModel.engineVersion != null)
@@ -100,7 +101,7 @@ namespace SSLLabsApiWrapper
 
 		public Analyze Analyze(string host, Publish publish, StartNew startNew, FromCache fromCache, int? maxHours, All all, IgnoreMismatch ignoreMismatch)
 		{
-			var analyzeModel = new Analyze();
+			Analyze analyzeModel = new Analyze();
 
 			// Checking host is valid before continuing
 			if (!_urlValidation.IsValid(host))
@@ -111,12 +112,12 @@ namespace SSLLabsApiWrapper
 			}
 
 			// Building request model
-			var requestModel = _requestModelFactory.NewAnalyzeRequestModel(ApiUrl, "analyze", host, publish.ToString().ToLower(), startNew.ToString().ToLower(), 
+			RequestModel requestModel = _requestModelFactory.NewAnalyzeRequestModel(ApiUrl, "analyze", host, publish.ToString().ToLower(), startNew.ToString().ToLower(), 
 				fromCache.ToString().ToLower(), maxHours, all.ToString().ToLower(), ignoreMismatch.ToString().ToLower());
 
 			try
 			{
-				var webResponse = _apiProvider.MakeGetRequest(requestModel);
+				WebResponseModel webResponse = _apiProvider.MakeGetRequest(requestModel);
 				analyzeModel = _responsePopulation.AnalyzeModel(webResponse, analyzeModel);
 			}
 			catch (Exception ex)
@@ -144,10 +145,10 @@ namespace SSLLabsApiWrapper
 		public Analyze AutomaticAnalyze(string host, Publish publish, StartNew startNew, FromCache fromCache, int? maxHours, All all, IgnoreMismatch ignoreMismatch,
 			int maxWaitInterval, int sleepInterval)
 	    {
-			var startTime = DateTime.UtcNow;
-			var sleepIntervalMilliseconds = sleepInterval * 1000;
-			var apiPassCount = 1;
-			var analyzeModel = Analyze(host, publish, startNew, fromCache, maxHours, all, ignoreMismatch);
+			DateTime startTime = DateTime.UtcNow;
+			int sleepIntervalMilliseconds = sleepInterval * 1000;
+			int apiPassCount = 1;
+			Analyze analyzeModel = Analyze(host, publish, startNew, fromCache, maxHours, all, ignoreMismatch);
 
 			// Ignoring cache settings after first request to prevent loop
 			startNew = StartNew.Ignore;
@@ -172,7 +173,7 @@ namespace SSLLabsApiWrapper
 
 		public Endpoint GetEndpointData(string host, string s, FromCache fromCache)
 	    {
-		    var endpointModel = new Endpoint();
+		    Endpoint endpointModel = new Endpoint();
 
 			// Checking host is valid before continuing
 			if (!_urlValidation.IsValid(host))
@@ -183,12 +184,12 @@ namespace SSLLabsApiWrapper
 			}
 
 			// Building request model
-			var requestModel = _requestModelFactory.NewEndpointDataRequestModel(ApiUrl, "getEndpointData", host, s,
+			RequestModel requestModel = _requestModelFactory.NewEndpointDataRequestModel(ApiUrl, "getEndpointData", host, s,
 				fromCache.ToString());
 
 			try
 			{
-				var webResponse = _apiProvider.MakeGetRequest(requestModel);
+				WebResponseModel webResponse = _apiProvider.MakeGetRequest(requestModel);
 				endpointModel = _responsePopulation.EndpointModel(webResponse, endpointModel);
 			}
 			catch (Exception ex)
@@ -205,12 +206,12 @@ namespace SSLLabsApiWrapper
 
 	    public StatusCodes GetStatusCodes()
 	    {
-			var statusCodesModel = new StatusCodes();
-		    var requestModel = _requestModelFactory.NewStatusCodesRequestModel(ApiUrl, "getStatusCodes");
+			StatusCodes statusCodesModel = new StatusCodes();
+		    RequestModel requestModel = _requestModelFactory.NewStatusCodesRequestModel(ApiUrl, "getStatusCodes");
 
 		    try
 		    {
-			    var webResponse = _apiProvider.MakeGetRequest(requestModel);
+			    WebResponseModel webResponse = _apiProvider.MakeGetRequest(requestModel);
 			    statusCodesModel = _responsePopulation.StatusCodesModel(webResponse, statusCodesModel);
 		    }
 		    catch (Exception ex)

@@ -6,7 +6,7 @@ namespace SSLLabsApiWrapper.Domain
 	{
 		public bool IsValid(string url)
 		{
-			var valid = true;
+			bool valid = true;
 
 			Uri uri = null;
 			if (!Uri.TryCreate(url, UriKind.Absolute, out uri) || null == uri)

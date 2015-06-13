@@ -12,7 +12,7 @@ namespace SSLLabsApiWrapper.Domain
 		public RequestModel NewAnalyzeRequestModel(string apiBaseUrl, string action, string host, string publish, string startNew,
 			string fromCache, int? maxHours, string all, string ignoreMismatch)
 		{
-			var requestModel = new RequestModel() { ApiBaseUrl = apiBaseUrl, Action = action};
+			RequestModel requestModel = new RequestModel() { ApiBaseUrl = apiBaseUrl, Action = action};
 
 			requestModel.Parameters.Add("host", host);
 			requestModel.Parameters.Add("publish", publish);
@@ -28,7 +28,7 @@ namespace SSLLabsApiWrapper.Domain
 
 		public RequestModel NewEndpointDataRequestModel(string apiBaseUrl, string action, string host, string s, string fromCache)
 		{
-			var requestModel = new RequestModel() {ApiBaseUrl = apiBaseUrl, Action = action};
+			RequestModel requestModel = new RequestModel() {ApiBaseUrl = apiBaseUrl, Action = action};
 
 			requestModel.Parameters.Add("host", host);
 			requestModel.Parameters.Add("s", s);

@@ -15,8 +15,8 @@ namespace given_that_I_make_a_info_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
-			var webResponseModel = new WebResponseModel()
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "{\"engineVersion\":\"1.11.4\",\"criteriaVersion\":\"2009i\",\"clientMaxAssessments\":5,\"notice\":\"Some notice goes here\"}",
 				StatusCode = 200,
@@ -26,7 +26,7 @@ namespace given_that_I_make_a_info_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.Info();
 		}
 
@@ -55,8 +55,8 @@ namespace given_that_I_make_a_info_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
-			var webResponseModel = new WebResponseModel()
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = null,
 				StatusCode = 0,
@@ -66,7 +66,7 @@ namespace given_that_I_make_a_info_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
 			Response = ssllService.Info();
 		}
 
@@ -83,8 +83,8 @@ namespace given_that_I_make_a_info_request
 		[ClassInitialize]
 		public static void Setup(TestContext testContext)
 		{
-			var mockedApiProvider = new Mock<IApiProvider>();
-			var webResponseModel = new WebResponseModel()
+			Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
+			WebResponseModel webResponseModel = new WebResponseModel()
 			{
 				Payloay = "",
 				StatusCode = 0,
@@ -94,7 +94,7 @@ namespace given_that_I_make_a_info_request
 
 			mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-			var ssllService = new SSLLabsApiService("https://blah-blah.dev.ssllabs.com/api/blah/", mockedApiProvider.Object);
+			SSLLabsApiService ssllService = new SSLLabsApiService("https://blah-blah.dev.ssllabs.com/api/blah/", mockedApiProvider.Object);
 			Response = ssllService.Info();
 		}
 	}
