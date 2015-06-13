@@ -129,7 +129,7 @@ namespace SSLLabsApiWrapper
 
         public Analyze AutomaticAnalyze(string host, int maxWaitInterval = 300, int sleepInterval = 15)
         {
-            return AutomaticAnalyze(host, Publish.Off, StartNew.On, FromCache.Ignore, null, All.On, IgnoreMismatch.Off, maxWaitInterval, sleepInterval);
+            return AutomaticAnalyze(host, Publish.Off, StartNew.On, FromCache.Ignore, null, All.Done, IgnoreMismatch.Off, maxWaitInterval, sleepInterval);
         }
 
         public Analyze AutomaticAnalyze(string host, Publish publish, StartNew startNew, FromCache fromCache, int? maxHours, All all, IgnoreMismatch ignoreMismatch,
