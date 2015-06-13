@@ -41,7 +41,7 @@ namespace given_that_I_make_a_info_request
         [TestMethod]
         public void then_the_info_response_should_be_populated_with_a_engine_number()
         {
-            Response.engineVersion.Should().NotBeNullOrEmpty();
+            Response.EngineVersion.Should().NotBeNullOrEmpty();
         }
 
         [TestMethod]

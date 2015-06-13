@@ -46,7 +46,7 @@ namespace SSLLabsApiWrapper
                 WebResponseModel webResponse = _apiProvider.MakeGetRequest(requestModel);
                 infoModel = _responsePopulation.InfoModel(webResponse, infoModel);
 
-                if (infoModel.engineVersion != null)
+                if (infoModel.EngineVersion != null)
                 {
                     infoModel.Online = true;
                 }

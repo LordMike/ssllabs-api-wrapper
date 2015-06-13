@@ -39,7 +39,7 @@ namespace given_that_I_make_a_info_request
         [TestMethod]
         public void then_clientMaxAssessments_should_be_greater_than_zero()
         {
-            _info.clientMaxAssessments.Should().BeGreaterThan(0);
+            _info.ClientMaxAssessments.Should().BeGreaterThan(0);
         }
 
         [TestMethod]
