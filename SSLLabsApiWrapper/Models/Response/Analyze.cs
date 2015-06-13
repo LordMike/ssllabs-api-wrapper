@@ -4,16 +4,26 @@ namespace SSLLabsApiWrapper.Models.Response
 {
     public class Analyze : BaseModel
     {
-        public string host { get; set; }
-        public int port { get; set; }
-        public string protocol { get; set; }
-        public bool isPublic { get; set; }
-        public string status { get; set; }
-        public string statusMessage { get; set; }
-        public long startTime { get; set; }
-        public long testTime { get; set; }
-        public string engineVersion { get; set; }
-        public string criteriaVersion { get; set; }
-        public List<Endpoint> endpoints { get; set; }
+        public string Host { get; set; }
+
+        public int Port { get; set; }
+
+        public string Protocol { get; set; }
+
+        public bool IsPublic { get; set; }
+
+        public string Status { get; set; }
+
+        public string StatusMessage { get; set; }
+
+        public long StartTime { get; set; }
+
+        public long TestTime { get; set; }
+
+        public string EngineVersion { get; set; }
+
+        public string CriteriaVersion { get; set; }
+
+        public List<Endpoint> Endpoints { get; set; }
     }
 }

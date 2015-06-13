@@ -42,7 +42,7 @@ namespace given_that_I_make_a_analyze_request
         [TestMethod]
         public void then_the_scan_results_should_not_be_public()
         {
-            Response.isPublic.Should().BeFalse();
+            Response.IsPublic.Should().BeFalse();
         }
     }
 
@@ -75,7 +75,7 @@ namespace given_that_I_make_a_analyze_request
         [TestMethod]
         public void then_the_scan_results_should_not_be_public()
         {
-            Response.isPublic.Should().BeFalse();
+            Response.IsPublic.Should().BeFalse();
         }
     }
 
@@ -112,7 +112,7 @@ namespace given_that_I_make_a_analyze_request
         [TestMethod]
         public void then_the_scan_results_should_be_public()
         {
-            Response.isPublic.Should().BeTrue();
+            Response.IsPublic.Should().BeTrue();
         }
     }
 
@@ -184,7 +184,7 @@ namespace given_that_I_make_a_analyze_request
         [TestMethod]
         public void then_the_host_property_should_match_the_requested_hostname()
         {
-            Response.host.Should().Be(TestHost);
+            Response.Host.Should().Be(TestHost);
         }
 
         [TestMethod]
@@ -196,7 +196,7 @@ namespace given_that_I_make_a_analyze_request
         [TestMethod]
         public void then_the_port_should_be_that_of_a_ssl_connection()
         {
-            Response.port.Should().Be(443);
+            Response.Port.Should().Be(443);
         }
     }
 

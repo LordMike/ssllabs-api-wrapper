@@ -119,7 +119,7 @@ namespace SSLLabsApiWrapper
             startNew = StartNew.Ignore;
 
             // Shouldn't have to check status header as HasErrorOccurred should be enough
-            while (analyzeModel.HasErrorOccurred == false && analyzeModel.status != "READY" &&
+            while (analyzeModel.HasErrorOccurred == false && analyzeModel.Status != "READY" &&
                    (DateTime.UtcNow - startTime).TotalSeconds < maxWaitInterval)
             {
                 Thread.Sleep(sleepIntervalMilliseconds);

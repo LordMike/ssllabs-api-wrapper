@@ -54,19 +54,19 @@ namespace given_that_I_make_a_automaticanalyze_request
         [TestMethod]
         public void then_should_analyze_status_should_not_be_null()
         {
-            _analyze.status.Should().NotBeNullOrEmpty();
+            _analyze.Status.Should().NotBeNullOrEmpty();
         }
 
         [TestMethod]
         public void then_start_time_should_be_greater_than_zero()
         {
-            _analyze.startTime.Should().BeGreaterThan(0);
+            _analyze.StartTime.Should().BeGreaterThan(0);
         }
 
         [TestMethod]
         public void then_the_host_in_the_response_should_match_the_request()
         {
-            _analyze.host.Should().Match(_host);
+            _analyze.Host.Should().Match(_host);
         }
     }
 }

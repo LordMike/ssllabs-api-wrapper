@@ -36,9 +36,9 @@ namespace SSLLabsApiWrapper.Domain
             analyzeModel.Header = PopulateHeader(analyzeModel.Header, webResponse);
             analyzeModel.Wrapper = PopulateWrapper(analyzeModel.Wrapper, webResponse);
 
-            if (analyzeModel.status == "ERROR")
+            if (analyzeModel.Status == "ERROR")
             {
-                analyzeModel.Errors.Add(new Error() {message = analyzeModel.statusMessage});
+                analyzeModel.Errors.Add(new Error() {message = analyzeModel.StatusMessage});
             }
 
             return analyzeModel;
