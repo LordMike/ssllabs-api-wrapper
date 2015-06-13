@@ -19,7 +19,7 @@ namespace SSLLabsApiWrapper
         private readonly UrlValidation _urlValidation;
         private string ApiUrl { get; set; }
 
-        public SSLLabsApiService(string apiUrl)
+        public SSLLabsApiService(string apiUrl = "https://api.ssllabs.com/api/v2/")
             : this(apiUrl, new SSLLabsApi())
         {
         }
