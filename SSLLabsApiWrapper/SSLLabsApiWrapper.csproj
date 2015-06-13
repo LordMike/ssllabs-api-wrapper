@@ -46,11 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\All.cs" />
     <Compile Include="External\SSLLabsApi.cs" />
+    <Compile Include="Enums\FromCache.cs" />
+    <Compile Include="Enums\IgnoreMismatch.cs" />
     <Compile Include="Interfaces\IBaseResponse.cs" />
     <Compile Include="Models\Response\BaseSubModels\Wrapper.cs" />
     <Compile Include="Models\Response\StatusCodes.cs" />
     <Compile Include="Models\WebResponseModel.cs" />
+    <Compile Include="Enums\Publish.cs" />
     <Compile Include="SSLLabsApiService.cs" />
     <Compile Include="Interfaces\IApiProvider.cs" />
     <Compile Include="Domain\RequestModelFactory.cs" />
@@ -76,6 +80,7 @@
     <Compile Include="Models\RequestModel.cs" />
     <Compile Include="Models\Response\StatusCodesSubModels\StatusDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Enums\StartNew.cs" />
     <Compile Include="Utilities\EnumExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

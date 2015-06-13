@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Threading;
 using SSLLabsApiWrapper.Domain;
 using SSLLabsApiWrapper.External;
@@ -10,38 +9,6 @@ using SSLLabsApiWrapper.Models.Response.BaseSubModels;
 
 namespace SSLLabsApiWrapper
 {
-    public enum Publish
-    {
-        [Description("on")] On,
-        [Description("off")] Off
-    }
-
-    public enum StartNew
-    {
-        [Description("on")] On,
-        Ignore
-    }
-
-    public enum FromCache
-    {
-        [Description("on")] On,
-        [Description("off")] Off,
-        Ignore
-    }
-
-    public enum All
-    {
-        [Description("on")] On,
-        [Description("done")] Done,
-        Ignore
-    }
-
-    public enum IgnoreMismatch
-    {
-        [Description("on")] On,
-        [Description("off")] Off
-    }
-
     public class SSLLabsApiService
     {
         #region construction
