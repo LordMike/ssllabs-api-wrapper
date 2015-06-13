@@ -98,8 +98,8 @@ namespace given_that_I_make_a_analyze_request
             mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
             SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
-            Response = ssllService.Analyze(TestHost, SSLLabsApiService.Publish.On, SSLLabsApiService.StartNew.On,
-                SSLLabsApiService.FromCache.Ignore, null, SSLLabsApiService.All.Done, SSLLabsApiService.IgnoreMismatch.Off);
+            Response = ssllService.Analyze(TestHost, Publish.On, StartNew.On,
+                FromCache.Ignore, null, All.Done, IgnoreMismatch.Off);
         }
 
         [TestMethod]
@@ -130,8 +130,8 @@ namespace given_that_I_make_a_analyze_request
             mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
             SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
-            Response = ssllService.Analyze(TestHost, SSLLabsApiService.Publish.On, SSLLabsApiService.StartNew.On,
-                SSLLabsApiService.FromCache.Ignore, null, SSLLabsApiService.All.Done, SSLLabsApiService.IgnoreMismatch.Off);
+            Response = ssllService.Analyze(TestHost, Publish.On, StartNew.On,
+                FromCache.Ignore, null, All.Done, IgnoreMismatch.Off);
         }
 
         [TestMethod]
@@ -160,28 +160,8 @@ namespace given_that_I_make_a_analyze_request
             mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
             SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
-            Response = ssllService.Analyze(TestHost, SSLLabsApiService.Publish.On, SSLLabsApiService.StartNew.On,
-                SSLLabsApiService.FromCache.Ignore, null, SSLLabsApiService.All.Done, SSLLabsApiService.IgnoreMismatch.Off);
-        }
-    }
-
-    [TestClass]
-    public class when_a_invalid_request_is_made_with_malformed_url_hostname : NegativeTests
-    {
-        [ClassInitialize]
-        public static void Setup(TestContext testContext)
-        {
-            Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
-            TestHost = "www.ashleypoo/le.somereallybadurl";
-
-            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
-            Response = ssllService.Analyze(TestHost);
-        }
-
-        [TestMethod]
-        public void then_preflight_error_should_be_thrown()
-        {
-            Response.Errors.Any(x => x.message == "Host does not pass preflight validation. No Api call has been made.").Should().BeTrue();
+            Response = ssllService.Analyze(TestHost, Publish.On, StartNew.On,
+                FromCache.Ignore, null, All.Done, IgnoreMismatch.Off);
         }
     }
 
