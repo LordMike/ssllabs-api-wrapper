@@ -59,13 +59,13 @@ namespace given_that_I_make_a_GetEndpointDetails_request
         [TestMethod]
         public void then_the_ip_in_the_response_should_match_the_request()
         {
-            _endpoint.ipAddress.Should().Match(_endpointIp);
+            _endpoint.IpAddress.Should().Match(_endpointIp);
         }
 
         [TestMethod]
         public void then_the_status_message_should_not_be_null()
         {
-            _endpoint.statusMessage.Should().NotBeNullOrEmpty();
+            _endpoint.StatusMessage.Should().NotBeNullOrEmpty();
         }
 
         [TestMethod]

@@ -134,19 +134,19 @@ namespace given_that_I_make_a_get_endpoint_details_request
         [TestMethod]
         public void then_no_security_warnings_should_be_found()
         {
-            Response.hasWarnings.Should().BeFalse();
+            Response.HasWarnings.Should().BeFalse();
         }
 
         [TestMethod]
         public void then_the_progress_should_be_100_percent()
         {
-            Response.progress.Should().Be(100);
+            Response.Progress.Should().Be(100);
         }
 
         [TestMethod]
         public void then_grade_should_be_A()
         {
-            Response.grade.Should().Be("A");
+            Response.Grade.Should().Be("A");
         }
 
         [TestMethod]
