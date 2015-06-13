@@ -194,27 +194,20 @@ namespace given_that_I_make_a_get_endpoint_details_request
     }
 
     [TestClass]
-    public class when_a_invalid_request_is_made_with_malformed_url_hostname : NegativeTests
+    public class when_a_invalid_request_is_made_with_malformed_url_hostname 
     {
-        [ClassInitialize]
-        public static void Setup(TestContext testContext)
-        {
-            Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
-            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/",
-                mockedApiProvider.Object);
-
-            TestHost = "www.ashleypoole.somereallybadurl";
-            TestIP = "111.111.111.111";
-
-            Response = ssllService.GetEndpointData(TestHost, TestIP);
-        }
-
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void then_preflight_error_should_be_thrown()
         {
-            Response.Errors.Any(x => x.message == "Host does not pass preflight validation. No Api call has been made.")
-                .Should()
-                .BeTrue();
+            Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
+            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+
+            string host = "www.ashleypo/ole.somereallybadurl";
+            string ip = "111.111.111.111";
+
+            ssllService.GetEndpointData(host, ip);
+            Assert.Fail();
         }
     }
 
