@@ -109,8 +109,9 @@ namespace SSLLabsApiWrapper
             Analyze analyzeModel = new Analyze();
 
             // Checking host is valid before continuing
-            ValidateHostname(host);
-
+            if (!UrlValidation.IsValidHostname(host))
+                throw new ArgumentException("Hostname is not valid: " + host);
+            
             // Building request model
             RequestModel requestModel = _requestModelFactory.NewAnalyzeRequestModel(ApiUrl, "analyze", host, publish, startNew,
                 fromCache, maxHours, all, ignoreMismatch);
@@ -166,7 +167,8 @@ namespace SSLLabsApiWrapper
             Endpoint endpointModel = new Endpoint();
 
             // Checking host is valid before continuing
-            ValidateHostname(host);
+            if (!UrlValidation.IsValidHostname(host))
+                throw new ArgumentException("Hostname is not valid: " + host);
 
             // Building request model
             RequestModel requestModel = _requestModelFactory.NewEndpointDataRequestModel(ApiUrl, "getEndpointData", host, server, fromCache.ToString());
@@ -205,18 +207,6 @@ namespace SSLLabsApiWrapper
             }
 
             return statusCodesModel;
-        }
-
-        private void ValidateHostname(string hostname)
-        {
-            if (Uri.CheckHostName(hostname) == UriHostNameType.Dns)
-                return;
-
-            Uri uri;
-            if (Uri.TryCreate(hostname, UriKind.Absolute, out uri))
-            return;
-
-            throw new ArgumentException("Hostname is not valid: " + hostname);
         }
     }
 }
