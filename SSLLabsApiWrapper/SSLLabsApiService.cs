@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using SSLLabsApiWrapper.Domain;
 using SSLLabsApiWrapper.External;
@@ -9,6 +10,47 @@ using SSLLabsApiWrapper.Models.Response.BaseSubModels;
 
 namespace SSLLabsApiWrapper
 {
+    public enum Publish
+    {
+        [Description("on")]
+        On,
+        [Description("off")]
+        Off
+    }
+
+    public enum StartNew
+    {
+        [Description("on")]
+        On,
+        Ignore
+    }
+
+    public enum FromCache
+    {
+        [Description("on")]
+        On,
+        [Description("off")]
+        Off,
+        Ignore
+    }
+
+    public enum All
+    {
+        [Description("on")]
+        On,
+        [Description("done")]
+        Done,
+        Ignore
+    }
+
+    public enum IgnoreMismatch
+    {
+        [Description("on")]
+        On,
+        [Description("off")]
+        Off
+    }
+
     public class SSLLabsApiService
     {
         #region construction
@@ -18,38 +60,6 @@ namespace SSLLabsApiWrapper
         private readonly ResponsePopulation _responsePopulation;
         private readonly UrlValidation _urlValidation;
         private string ApiUrl { get; set; }
-
-        public enum Publish
-        {
-            On,
-            Off
-        }
-
-        public enum StartNew
-        {
-            On,
-            Ignore
-        }
-
-        public enum FromCache
-        {
-            On,
-            Off,
-            Ignore
-        }
-
-        public enum All
-        {
-            On,
-            Done,
-            Ignore
-        }
-
-        public enum IgnoreMismatch
-        {
-            On,
-            Off
-        }
 
         public SSLLabsApiService(string apiUrl)
             : this(apiUrl, new SSLLabsApi())
@@ -99,16 +109,11 @@ namespace SSLLabsApiWrapper
             Analyze analyzeModel = new Analyze();
 
             // Checking host is valid before continuing
-            if (Uri.CheckHostName(host) != UriHostNameType.Dns)
-            {
-                analyzeModel.HasErrorOccurred = true;
-                analyzeModel.Errors.Add(new Error { message = "Host does not pass preflight validation. No Api call has been made." });
-                return analyzeModel;
-            }
+            ValidateHostname(host);
 
             // Building request model
-            RequestModel requestModel = _requestModelFactory.NewAnalyzeRequestModel(ApiUrl, "analyze", host, publish.ToString().ToLower(), startNew.ToString().ToLower(),
-                fromCache.ToString().ToLower(), maxHours, all.ToString().ToLower(), ignoreMismatch.ToString().ToLower());
+            RequestModel requestModel = _requestModelFactory.NewAnalyzeRequestModel(ApiUrl, "analyze", host, publish, startNew,
+                fromCache, maxHours, all, ignoreMismatch);
 
             try
             {
@@ -129,7 +134,7 @@ namespace SSLLabsApiWrapper
 
         public Analyze AutomaticAnalyze(string host, int maxWaitInterval = 300, int sleepInterval = 15)
         {
-            return AutomaticAnalyze(host, Publish.Off, StartNew.On, FromCache.Ignore, null, All.Done, IgnoreMismatch.Off, maxWaitInterval, sleepInterval);
+            return AutomaticAnalyze(host, Publish.Off, StartNew.Ignore, FromCache.Ignore, null, All.Done, IgnoreMismatch.Off, maxWaitInterval, sleepInterval);
         }
 
         public Analyze AutomaticAnalyze(string host, Publish publish, StartNew startNew, FromCache fromCache, int? maxHours, All all, IgnoreMismatch ignoreMismatch,
@@ -161,12 +166,7 @@ namespace SSLLabsApiWrapper
             Endpoint endpointModel = new Endpoint();
 
             // Checking host is valid before continuing
-            if (!_urlValidation.IsValid(host))
-            {
-                endpointModel.HasErrorOccurred = true;
-                endpointModel.Errors.Add(new Error { message = "Host does not pass preflight validation. No Api call has been made." });
-                return endpointModel;
-            }
+            ValidateHostname(host);
 
             // Building request model
             RequestModel requestModel = _requestModelFactory.NewEndpointDataRequestModel(ApiUrl, "getEndpointData", host, server, fromCache.ToString());
@@ -205,6 +205,18 @@ namespace SSLLabsApiWrapper
             }
 
             return statusCodesModel;
+        }
+
+        private void ValidateHostname(string hostname)
+        {
+            if (Uri.CheckHostName(hostname) == UriHostNameType.Dns)
+                return;
+
+            Uri uri;
+            if (Uri.TryCreate(hostname, UriKind.Absolute, out uri))
+            return;
+
+            throw new ArgumentException("Hostname is not valid: " + hostname);
         }
     }
 }

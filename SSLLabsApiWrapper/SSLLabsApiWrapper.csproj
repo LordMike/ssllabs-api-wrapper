@@ -76,6 +76,7 @@
     <Compile Include="Models\RequestModel.cs" />
     <Compile Include="Models\Response\StatusCodesSubModels\StatusDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\EnumExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
