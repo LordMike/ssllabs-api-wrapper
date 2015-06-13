@@ -99,7 +99,7 @@ namespace SSLLabsApiWrapper
             Analyze analyzeModel = new Analyze();
 
             // Checking host is valid before continuing
-            if (!_urlValidation.IsValid(host))
+            if (Uri.CheckHostName(host) != UriHostNameType.Dns)
             {
                 analyzeModel.HasErrorOccurred = true;
                 analyzeModel.Errors.Add(new Error { message = "Host does not pass preflight validation. No Api call has been made." });

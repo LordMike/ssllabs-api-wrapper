@@ -172,7 +172,7 @@ namespace given_that_I_make_a_analyze_request
         public static void Setup(TestContext testContext)
         {
             Mock<IApiProvider> mockedApiProvider = new Mock<IApiProvider>();
-            TestHost = "www.ashleypoole.somereallybadurl";
+            TestHost = "www.ashleypoo/le.somereallybadurl";
 
             SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
             Response = ssllService.Analyze(TestHost);
