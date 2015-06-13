@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace SSLLabsApiWrapper.Utilities
 {
-    static class EnumExtensions
+    internal static class EnumExtensions
     {
         public static string GetDescription(this Enum element)
         {
@@ -14,10 +14,10 @@ namespace SSLLabsApiWrapper.Utilities
 
             if (memberInfo.Length > 0)
             {
-                object[] attributes = memberInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                object[] attributes = memberInfo[0].GetCustomAttributes(typeof (DescriptionAttribute), false);
 
                 if (attributes.Length > 0)
-                    return ((DescriptionAttribute)attributes[0]).Description;
+                    return ((DescriptionAttribute) attributes[0]).Description;
             }
 
             return element.ToString();

@@ -6,7 +6,7 @@ using SSLLabsApiWrapper.Domain;
 namespace given_that_I_make_a_analyze_request
 {
     [TestClass]
-    public class HostNameChecks 
+    public class HostNameChecks
     {
         [TestMethod]
         public void HostNameCheck_Valid()

@@ -3,17 +3,18 @@ using SSLLabsApiWrapper.Utilities;
 
 namespace SSLLabsApiWrapper.Domain
 {
-    class RequestModelFactory
+    internal class RequestModelFactory
     {
         public RequestModel NewInfoRequestModel(string apiBaseUrl, string action)
         {
-            return new RequestModel() { ApiBaseUrl = apiBaseUrl, Action = action };
+            return new RequestModel() {ApiBaseUrl = apiBaseUrl, Action = action};
         }
 
-        public RequestModel NewAnalyzeRequestModel(string apiBaseUrl, string action, string host, Publish publish, StartNew startNew,
+        public RequestModel NewAnalyzeRequestModel(string apiBaseUrl, string action, string host, Publish publish,
+            StartNew startNew,
             FromCache fromCache, int? maxHours, All all, IgnoreMismatch ignoreMismatch)
         {
-            RequestModel requestModel = new RequestModel() { ApiBaseUrl = apiBaseUrl, Action = action };
+            RequestModel requestModel = new RequestModel() {ApiBaseUrl = apiBaseUrl, Action = action};
 
             requestModel.Parameters.Add("host", host);
             requestModel.Parameters.Add("publish", publish.GetDescription());
@@ -36,9 +37,10 @@ namespace SSLLabsApiWrapper.Domain
             return requestModel;
         }
 
-        public RequestModel NewEndpointDataRequestModel(string apiBaseUrl, string action, string host, string s, string fromCache)
+        public RequestModel NewEndpointDataRequestModel(string apiBaseUrl, string action, string host, string s,
+            string fromCache)
         {
-            RequestModel requestModel = new RequestModel() { ApiBaseUrl = apiBaseUrl, Action = action };
+            RequestModel requestModel = new RequestModel() {ApiBaseUrl = apiBaseUrl, Action = action};
 
             requestModel.Parameters.Add("host", host);
             requestModel.Parameters.Add("s", s);
@@ -49,7 +51,7 @@ namespace SSLLabsApiWrapper.Domain
 
         public RequestModel NewStatusCodesRequestModel(string apiBaseUrl, string action)
         {
-            return new RequestModel() { ApiBaseUrl = apiBaseUrl, Action = action };
+            return new RequestModel() {ApiBaseUrl = apiBaseUrl, Action = action};
         }
     }
 }

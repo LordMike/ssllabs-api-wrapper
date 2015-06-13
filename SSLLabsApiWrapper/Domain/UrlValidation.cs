@@ -2,7 +2,7 @@ using System;
 
 namespace SSLLabsApiWrapper.Domain
 {
-    class UrlValidation
+    internal class UrlValidation
     {
         public bool IsValid(string url)
         {

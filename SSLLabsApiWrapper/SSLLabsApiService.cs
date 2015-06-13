@@ -12,43 +12,34 @@ namespace SSLLabsApiWrapper
 {
     public enum Publish
     {
-        [Description("on")]
-        On,
-        [Description("off")]
-        Off
+        [Description("on")] On,
+        [Description("off")] Off
     }
 
     public enum StartNew
     {
-        [Description("on")]
-        On,
+        [Description("on")] On,
         Ignore
     }
 
     public enum FromCache
     {
-        [Description("on")]
-        On,
-        [Description("off")]
-        Off,
+        [Description("on")] On,
+        [Description("off")] Off,
         Ignore
     }
 
     public enum All
     {
-        [Description("on")]
-        On,
-        [Description("done")]
-        Done,
+        [Description("on")] On,
+        [Description("done")] Done,
         Ignore
     }
 
     public enum IgnoreMismatch
     {
-        [Description("on")]
-        On,
-        [Description("off")]
-        Off
+        [Description("on")] On,
+        [Description("off")] Off
     }
 
     public class SSLLabsApiService
@@ -79,7 +70,7 @@ namespace SSLLabsApiWrapper
 
         public Info Info()
         {
-            Info infoModel = new Info() { };
+            Info infoModel = new Info() {};
             RequestModel requestModel = _requestModelFactory.NewInfoRequestModel(ApiUrl, "info");
 
             try
@@ -96,24 +87,30 @@ namespace SSLLabsApiWrapper
             catch (Exception ex)
             {
                 infoModel.HasErrorOccurred = true;
-                infoModel.Errors.Add(new Error { message = ex.ToString() });
+                infoModel.Errors.Add(new Error {message = ex.ToString()});
             }
 
-            if (infoModel.Errors.Count != 0 && !infoModel.HasErrorOccurred) { infoModel.HasErrorOccurred = true; }
+            if (infoModel.Errors.Count != 0 && !infoModel.HasErrorOccurred)
+            {
+                infoModel.HasErrorOccurred = true;
+            }
 
             return infoModel;
         }
 
-        public Analyze Analyze(string host, Publish publish = Publish.Off, StartNew startNew = StartNew.On, FromCache fromCache = FromCache.Ignore, int? maxHours = null, All all = All.On, IgnoreMismatch ignoreMismatch = IgnoreMismatch.Off)
+        public Analyze Analyze(string host, Publish publish = Publish.Off, StartNew startNew = StartNew.On,
+            FromCache fromCache = FromCache.Ignore, int? maxHours = null, All all = All.On,
+            IgnoreMismatch ignoreMismatch = IgnoreMismatch.Off)
         {
             Analyze analyzeModel = new Analyze();
 
             // Checking host is valid before continuing
             if (!UrlValidation.IsValidHostname(host))
                 throw new ArgumentException("Hostname is not valid: " + host);
-            
+
             // Building request model
-            RequestModel requestModel = _requestModelFactory.NewAnalyzeRequestModel(ApiUrl, "analyze", host, publish, startNew,
+            RequestModel requestModel = _requestModelFactory.NewAnalyzeRequestModel(ApiUrl, "analyze", host, publish,
+                startNew,
                 fromCache, maxHours, all, ignoreMismatch);
 
             try
@@ -124,25 +121,30 @@ namespace SSLLabsApiWrapper
             catch (Exception ex)
             {
                 analyzeModel.HasErrorOccurred = true;
-                analyzeModel.Errors.Add(new Error { message = ex.ToString() });
+                analyzeModel.Errors.Add(new Error {message = ex.ToString()});
             }
 
             // Checking if errors have occoured either from ethier api or wrapper
-            if (analyzeModel.Errors.Count != 0 && !analyzeModel.HasErrorOccurred) { analyzeModel.HasErrorOccurred = true; }
+            if (analyzeModel.Errors.Count != 0 && !analyzeModel.HasErrorOccurred)
+            {
+                analyzeModel.HasErrorOccurred = true;
+            }
 
             return analyzeModel;
         }
 
         public Analyze AutomaticAnalyze(string host, int maxWaitInterval = 300, int sleepInterval = 15)
         {
-            return AutomaticAnalyze(host, Publish.Off, StartNew.Ignore, FromCache.Ignore, null, All.Done, IgnoreMismatch.Off, maxWaitInterval, sleepInterval);
+            return AutomaticAnalyze(host, Publish.Off, StartNew.Ignore, FromCache.Ignore, null, All.Done,
+                IgnoreMismatch.Off, maxWaitInterval, sleepInterval);
         }
 
-        public Analyze AutomaticAnalyze(string host, Publish publish, StartNew startNew, FromCache fromCache, int? maxHours, All all, IgnoreMismatch ignoreMismatch,
+        public Analyze AutomaticAnalyze(string host, Publish publish, StartNew startNew, FromCache fromCache,
+            int? maxHours, All all, IgnoreMismatch ignoreMismatch,
             int maxWaitInterval, int sleepInterval)
         {
             DateTime startTime = DateTime.UtcNow;
-            int sleepIntervalMilliseconds = sleepInterval * 1000;
+            int sleepIntervalMilliseconds = sleepInterval*1000;
             int apiPassCount = 1;
             Analyze analyzeModel = Analyze(host, publish, startNew, fromCache, maxHours, all, ignoreMismatch);
 
@@ -150,7 +152,8 @@ namespace SSLLabsApiWrapper
             startNew = StartNew.Ignore;
 
             // Shouldn't have to check status header as HasErrorOccurred should be enough
-            while (analyzeModel.HasErrorOccurred == false && analyzeModel.status != "READY" && (DateTime.UtcNow - startTime).TotalSeconds < maxWaitInterval)
+            while (analyzeModel.HasErrorOccurred == false && analyzeModel.status != "READY" &&
+                   (DateTime.UtcNow - startTime).TotalSeconds < maxWaitInterval)
             {
                 Thread.Sleep(sleepIntervalMilliseconds);
                 apiPassCount++;
@@ -171,7 +174,8 @@ namespace SSLLabsApiWrapper
                 throw new ArgumentException("Hostname is not valid: " + host);
 
             // Building request model
-            RequestModel requestModel = _requestModelFactory.NewEndpointDataRequestModel(ApiUrl, "getEndpointData", host, server, fromCache.ToString());
+            RequestModel requestModel = _requestModelFactory.NewEndpointDataRequestModel(ApiUrl, "getEndpointData", host,
+                server, fromCache.ToString());
 
             try
             {
@@ -181,11 +185,14 @@ namespace SSLLabsApiWrapper
             catch (Exception ex)
             {
                 endpointModel.HasErrorOccurred = true;
-                endpointModel.Errors.Add(new Error { message = ex.ToString() });
+                endpointModel.Errors.Add(new Error {message = ex.ToString()});
             }
 
             // Checking if errors have occoured either from ethier api or wrapper
-            if (endpointModel.Errors.Count != 0 && !endpointModel.HasErrorOccurred) { endpointModel.HasErrorOccurred = true; }
+            if (endpointModel.Errors.Count != 0 && !endpointModel.HasErrorOccurred)
+            {
+                endpointModel.HasErrorOccurred = true;
+            }
 
             return endpointModel;
         }
@@ -203,7 +210,7 @@ namespace SSLLabsApiWrapper
             catch (Exception ex)
             {
                 statusCodesModel.HasErrorOccurred = true;
-                statusCodesModel.Errors.Add(new Error { message = ex.ToString() });
+                statusCodesModel.Errors.Add(new Error {message = ex.ToString()});
             }
 
             return statusCodesModel;

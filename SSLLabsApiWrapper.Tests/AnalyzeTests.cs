@@ -20,12 +20,13 @@ namespace given_that_I_make_a_analyze_request
             TestHost = "https://www.ashleypoole.co.uk";
             WebResponseModel webResponseModel = new WebResponseModel()
             {
-                Payloay = "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTPS\",\"isPublic\":false,\"status\":\"READY\",\"" +
-                          "startTime\":1422115006431,\"testTime\":1422115131804,\"engineVersion\":\"1.12.8\",\"criteriaVersion\":\"2009i\",\"" +
-                          "endpoints\":[{\"ipAddress\":\"104.28.6.2\",\"statusMessage\":\"Ready\",\"grade\":\"A\",\"hasWarnings\":false,\"" +
-                          "isExceptional\":false,\"progress\":100,\"duration\":64286,\"eta\":2393,\"delegation\":3},{\"ipAddress\":\"104.28.7.2\"" +
-                          ",\"statusMessage\":\"Ready\",\"grade\":\"A\",\"hasWarnings\":false,\"isExceptional\":false,\"progress\":100,\"duration\"" +
-                          ":61046,\"eta\":2393,\"delegation\":3}]}",
+                Payloay =
+                    "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTPS\",\"isPublic\":false,\"status\":\"READY\",\"" +
+                    "startTime\":1422115006431,\"testTime\":1422115131804,\"engineVersion\":\"1.12.8\",\"criteriaVersion\":\"2009i\",\"" +
+                    "endpoints\":[{\"ipAddress\":\"104.28.6.2\",\"statusMessage\":\"Ready\",\"grade\":\"A\",\"hasWarnings\":false,\"" +
+                    "isExceptional\":false,\"progress\":100,\"duration\":64286,\"eta\":2393,\"delegation\":3},{\"ipAddress\":\"104.28.7.2\"" +
+                    ",\"statusMessage\":\"Ready\",\"grade\":\"A\",\"hasWarnings\":false,\"isExceptional\":false,\"progress\":100,\"duration\"" +
+                    ":61046,\"eta\":2393,\"delegation\":3}]}",
                 StatusCode = 200,
                 StatusDescription = "Ok",
                 Url = ("https://api.ssllabs.com/api/v2/analyze?host=" + TestHost)
@@ -33,7 +34,8 @@ namespace given_that_I_make_a_analyze_request
 
             mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/",
+                mockedApiProvider.Object);
             Response = ssllService.Analyze(TestHost);
         }
 
@@ -54,9 +56,10 @@ namespace given_that_I_make_a_analyze_request
             TestHost = "https://www.ashleypoole.co.uk";
             WebResponseModel webResponseModel = new WebResponseModel()
             {
-                Payloay = "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":false,\"status\":\"DNS\"" +
-                          ",\"statusMessage\":\"Resolving domain names\",\"startTime\":1422475200798,\"engineVersion\":\"1.12.8\"," +
-                          "\"criteriaVersion\":\"2009i\"}",
+                Payloay =
+                    "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":false,\"status\":\"DNS\"" +
+                    ",\"statusMessage\":\"Resolving domain names\",\"startTime\":1422475200798,\"engineVersion\":\"1.12.8\"," +
+                    "\"criteriaVersion\":\"2009i\"}",
                 StatusCode = 200,
                 StatusDescription = "Ok",
                 Url = ("https://api.ssllabs.com/api/v2/analyze?host=" + TestHost)
@@ -64,7 +67,8 @@ namespace given_that_I_make_a_analyze_request
 
             mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/",
+                mockedApiProvider.Object);
             Response = ssllService.Analyze(TestHost);
         }
 
@@ -76,7 +80,8 @@ namespace given_that_I_make_a_analyze_request
     }
 
     [TestClass]
-    public class when_a_valid_request_is_made_with_all_the_inputs_and_the_scan_is_at_endpoint_scanning_stage : PositiveTests
+    public class when_a_valid_request_is_made_with_all_the_inputs_and_the_scan_is_at_endpoint_scanning_stage :
+        PositiveTests
     {
         [ClassInitialize]
         public static void Setup(TestContext testContext)
@@ -85,11 +90,12 @@ namespace given_that_I_make_a_analyze_request
             TestHost = "https://www.ashleypoole.co.uk";
             WebResponseModel webResponseModel = new WebResponseModel()
             {
-                Payloay = "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":true,\"" +
-                          "status\":\"IN_PROGRESS\",\"startTime\":1422479488403,\"engineVersion\":\"1.12.8\",\"criteriaVersion\":\"2009i\"" +
-                          ",\"endpoints\":[{\"ipAddress\":\"104.28.6.2\",\"statusMessage\":\"In progress\",\"statusDetails\":\"TESTING_HTTPS\"" +
-                          ",\"statusDetailsMessage\":\"Sending one complete HTTPS request\",\"progress\":-1,\"eta\":-1,\"delegation\":3}," +
-                          "{\"ipAddress\":\"104.28.7.2\",\"statusMessage\":\"Pending\",\"progress\":-1,\"eta\":-1,\"delegation\":3}]}",
+                Payloay =
+                    "{\"host\":\"https://www.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":true,\"" +
+                    "status\":\"IN_PROGRESS\",\"startTime\":1422479488403,\"engineVersion\":\"1.12.8\",\"criteriaVersion\":\"2009i\"" +
+                    ",\"endpoints\":[{\"ipAddress\":\"104.28.6.2\",\"statusMessage\":\"In progress\",\"statusDetails\":\"TESTING_HTTPS\"" +
+                    ",\"statusDetailsMessage\":\"Sending one complete HTTPS request\",\"progress\":-1,\"eta\":-1,\"delegation\":3}," +
+                    "{\"ipAddress\":\"104.28.7.2\",\"statusMessage\":\"Pending\",\"progress\":-1,\"eta\":-1,\"delegation\":3}]}",
                 StatusCode = 200,
                 StatusDescription = "Ok",
                 Url = ("https://api.ssllabs.com/api/v2/analyze?host=" + TestHost + "&publish=on&all=done")
@@ -97,7 +103,8 @@ namespace given_that_I_make_a_analyze_request
 
             mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/",
+                mockedApiProvider.Object);
             Response = ssllService.Analyze(TestHost, Publish.On, StartNew.On,
                 FromCache.Ignore, null, All.Done, IgnoreMismatch.Off);
         }
@@ -110,7 +117,8 @@ namespace given_that_I_make_a_analyze_request
     }
 
     [TestClass]
-    public class when_a_invalid_request_is_made_with_all_the_inputs_and_the_scan_is_unable_to_resolve_hostname : NegativeTests
+    public class when_a_invalid_request_is_made_with_all_the_inputs_and_the_scan_is_unable_to_resolve_hostname :
+        NegativeTests
     {
         [ClassInitialize]
         public static void Setup(TestContext testContext)
@@ -119,9 +127,10 @@ namespace given_that_I_make_a_analyze_request
             TestHost = "https://www2.ashleypoole.co.uk";
             WebResponseModel webResponseModel = new WebResponseModel()
             {
-                Payloay = "{\"host\":\"https://www2.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":false,\"status\":\"ERROR\"," +
-                          "\"statusMessage\":\"Unable to resolve domain name\",\"startTime\":1422478797953,\"testTime\":1422478798017," +
-                          "\"engineVersion\":\"1.12.8\",\"criteriaVersion\":\"2009i\",\"cacheExpiryTime\":1422478858017}",
+                Payloay =
+                    "{\"host\":\"https://www2.ashleypoole.co.uk\",\"port\":443,\"protocol\":\"HTTP\",\"isPublic\":false,\"status\":\"ERROR\"," +
+                    "\"statusMessage\":\"Unable to resolve domain name\",\"startTime\":1422478797953,\"testTime\":1422478798017," +
+                    "\"engineVersion\":\"1.12.8\",\"criteriaVersion\":\"2009i\",\"cacheExpiryTime\":1422478858017}",
                 StatusCode = 200,
                 StatusDescription = "Ok",
                 Url = ("https://api.ssllabs.com/api/v2/analyze?host=" + TestHost)
@@ -129,7 +138,8 @@ namespace given_that_I_make_a_analyze_request
 
             mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/",
+                mockedApiProvider.Object);
             Response = ssllService.Analyze(TestHost, Publish.On, StartNew.On,
                 FromCache.Ignore, null, All.Done, IgnoreMismatch.Off);
         }
@@ -151,7 +161,8 @@ namespace given_that_I_make_a_analyze_request
             TestHost = "https://www.ashleypoole.co.uk";
             WebResponseModel webResponseModel = new WebResponseModel()
             {
-                Payloay = "{\"errors\":[{\"message\":\"Parameters \u0027fromCache\u0027 and \u0027startNew\u0027 cannot be used at the same time\"}]}",
+                Payloay =
+                    "{\"errors\":[{\"message\":\"Parameters \u0027fromCache\u0027 and \u0027startNew\u0027 cannot be used at the same time\"}]}",
                 StatusCode = 400,
                 StatusDescription = "Ok",
                 Url = ("https://api.ssllabs.com/api/v2/analyze?host=" + TestHost + "&startNew=on&fromCache=on&all=done")
@@ -159,7 +170,8 @@ namespace given_that_I_make_a_analyze_request
 
             mockedApiProvider.Setup(x => x.MakeGetRequest(It.IsAny<RequestModel>())).Returns(webResponseModel);
 
-            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/", mockedApiProvider.Object);
+            SSLLabsApiService ssllService = new SSLLabsApiService("https://api.ssllabs.com/api/v2/",
+                mockedApiProvider.Object);
             Response = ssllService.Analyze(TestHost, Publish.On, StartNew.On,
                 FromCache.Ignore, null, All.Done, IgnoreMismatch.Off);
         }

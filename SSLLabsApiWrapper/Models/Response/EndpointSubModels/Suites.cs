@@ -2,14 +2,14 @@
 
 namespace SSLLabsApiWrapper.Models.Response.EndpointSubModels
 {
-	public class Suites
-	{
-		public List<List> list { get; set; }
-		public bool preference { get; set; }
+    public class Suites
+    {
+        public List<List> list { get; set; }
+        public bool preference { get; set; }
 
-		public Suites()
-		{
-			list = new List<List>();
-		}
-	}
+        public Suites()
+        {
+            list = new List<List>();
+        }
+    }
 }

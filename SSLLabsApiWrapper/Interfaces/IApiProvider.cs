@@ -3,8 +3,8 @@ using SSLLabsApiWrapper.Models;
 
 namespace SSLLabsApiWrapper.Interfaces
 {
-	interface IApiProvider
-	{
-		WebResponseModel MakeGetRequest(RequestModel requestModel);
-	}
+    internal interface IApiProvider
+    {
+        WebResponseModel MakeGetRequest(RequestModel requestModel);
+    }
 }
